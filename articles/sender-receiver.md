@@ -1,5 +1,5 @@
 ---
-title: "C++26 の `std::execution` の概念まとめ [WIP]"
+title: "C++26 の std::execution の概念まとめ [WIP]"
 emoji: "💨"
 type: "tech"
 topics:
@@ -9,7 +9,7 @@ published: true
 
 # 概要
 
-[P2300 std::execution](https://wg21.link/p2300) がついに C++26 入りしたとのことで、自分のためにもどういった設計になっているのかを用語を整理しながら見ていこうと思います。
+[P2300 `std::execution`](https://wg21.link/p2300) がついに C++26 入りしたとのことで、自分のためにもどういった設計になっているのかを用語を整理しながら見ていこうと思います。
 
 # CPO の種別について
 
