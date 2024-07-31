@@ -122,3 +122,16 @@ auto my_value2 = my_query_object(env2);  // !!! ill-formed !!!
 ### `std::get_allocator`
 
 `std::get_allocator` は *queryable object* に関連する *allocator* を問い合わせます。例えば *asynchronous operation* を表すオブジェクトが特定の *allocator* を使用して構築されている場合それを使用して破棄する必要があり、そういった場面で使われるのだと思われます。
+
+### `std::get_stop_token`
+
+`std::get_stop_token` は *queryable object* に関連する stop token を問い合わせます。
+
+### `std::execution::get_env` 
+
+`std::execution​::​get_env` は、 *sender* に対しては *attribute* を、*receiver* に対しては *environment* を問い合わせます。
+元々は前者の問い合わせのために `get_attr` なる *query object* が存在していましたが、`get_env` に統合されたようです。
+
+### `std::execution::get_domain`
+
+*domain* と呼ばれる、*sender* が完了する *scheduler* に関連するタグ型を問い合わせます。
