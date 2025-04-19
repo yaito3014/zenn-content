@@ -78,7 +78,8 @@ sender アルゴリズムは *sender* を受け渡しする関数群であり、
 ## *query object* の一覧
 
 ### `std::forwarding_query`
-`std::forwarding_query` は *query object* 自体に問い合わせを行う *query object* です。その仕様は「*query object* `q` に対して `std::forwarding_query(q)` が `false` を返す場合、*queryable object* `env` と *exposition-only entity* `FWD-ENV(...)` について `FWD-ENV(env).query(q, args...)` が *ill-formed* になる」というものですが、つまり特定の箇所において `env` を引き渡す際に引き渡し以降の問い合わせを禁止するかどうかという性質のようです。
+`std::forwarding_query` は *query object* 自体に問い合わせを行う *query object* です。その仕様は「*query object* `q` に対して `std::forwarding_query(q)` が `false` を返す場合、*queryable object* `env` と *exposition-only entity* `FWD-ENV(...)` について `FWD-ENV(env).query(q, args...)` が *ill-formed* になる」というものです。
+つまり、特定の箇所において `env` を引き渡す際に引き渡し以降の問い合わせを禁止するかどうかというもののようです。
 
 ```cpp
 struct my_query_object_t {
@@ -121,17 +122,46 @@ auto my_value2 = my_query_object(env2);  // !!! ill-formed !!!
 
 ### `std::get_allocator`
 
-`std::get_allocator` は *queryable object* に関連する *allocator* を問い合わせます。例えば *asynchronous operation* を表すオブジェクトが特定の *allocator* を使用して構築されている場合それを使用して破棄する必要があり、そういった場面で使われるのだと思われます。
+*queryable object* に関連する *allocator* を問い合わせます。例えば *asynchronous operation* を表すオブジェクトが特定の *allocator* を使用して構築されている場合それを使用して破棄する必要があり、そういった場面で使われるのだと思われます。
 
 ### `std::get_stop_token`
 
-`std::get_stop_token` は *queryable object* に関連する stop token を問い合わせます。
+*queryable object* に関連する stop token を問い合わせます。
 
 ### `std::execution::get_env` 
 
-`std::execution​::​get_env` は、 *sender* に対しては *attribute* を、*receiver* に対しては *environment* を問い合わせます。
+*sender* に対しては *attribute* を、*receiver* に対しては *environment* を問い合わせます。
 元々は前者の問い合わせのために `get_attr` なる *query object* が存在していましたが、`get_env` に統合されたようです。
 
 ### `std::execution::get_domain`
 
 *domain* と呼ばれる、*sender* が完了する *scheduler* に関連するタグ型を問い合わせます。
+
+### `std::execution::get_scheduler`
+
+*queryable object* に関連する *scheduler* を問い合わせます。
+
+### `std::execution::get_delegation_scheduler`
+
+*queryable object* に関連する、forward progress delegation に適した *scheduler* を問い合わせます。
+
+### `std::execution​::​get_forward_progress_guarantee`
+
+*scheduler* に対し、その *scheduler* に関連する *execution resouce* の作る *execution agents* の forward progress guarantee を問い合わせます。
+
+
+#### `std::execution::forward_progress_guarantee`
+
+それぞれの forward progress guarantee を表す enum class です。
+
+```cpp
+enum class forward_progress_guarantee{
+  concurrent,
+  parallel,
+  weakly_parallel,
+};
+```
+
+### `std::execution::​get_completion_scheduler`
+
+*sender* の *attribute* から *completion scheduler* を問い合わせます。
