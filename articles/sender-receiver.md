@@ -71,8 +71,6 @@ sender アルゴリズムは *sender* を受け渡しする関数群であり、
 - *sender consumer*
   - *sender* を引数に取り非 *sender* を返す
 
-# 以下書きかけ
-
 # 詳細
 
 ## *query object* の一覧
@@ -131,7 +129,7 @@ auto my_value2 = my_query_object(env2);  // !!! ill-formed !!!
 ### `std::execution::get_env` 
 
 *sender* に対しては *attribute* を、*receiver* に対しては *environment* を問い合わせます。
-元々は前者の問い合わせのために `get_attr` なる *query object* が存在していましたが、`get_env` に統合されたようです。
+元々は前者の問い合わせのために `std::execution::get_attr` なる *query object* が存在していましたが、`std::execution::get_env` に統合されたようです。
 
 ### `std::execution::get_domain`
 
@@ -165,3 +163,29 @@ enum class forward_progress_guarantee{
 ### `std::execution::​get_completion_scheduler`
 
 *sender* の *attribute* から *completion scheduler* を問い合わせます。
+
+## scheduler
+
+`std::execution::scheduler` concept は *scheduler* の型に対する要求を定義します。
+具体的には、以下の通りです。
+
+```cpp
+namespace std::execution {
+  template<class Sch>
+    concept scheduler =
+      derived_from<typename remove_cvref_t<Sch>::scheduler_concept, scheduler_t> &&
+      queryable<Sch> &&
+      requires(Sch&& sch) {
+        { schedule(std::forward<Sch>(sch)) } -> sender;
+        { auto(get_completion_scheduler<set_value_t>(get_env(schedule(std::forward<Sch>(sch))))) } -> same_as<remove_cvref_t<Sch>>;
+      } &&
+      equality_comparable<remove_cvref_t<Sch>> &&
+      copyable<remove_cvref_t<Sch>>;
+}
+```
+
+ここで `std::execution::schedule` は *scheduler* を受け取る customization point object であり、適格な `schestd::execution::schedule` の呼び出しは *schedule-expression* と呼ばれます。
+
+---
+
+🏗️工事中
