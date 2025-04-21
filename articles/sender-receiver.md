@@ -201,12 +201,12 @@ namespace std::execution {
 
 template<class Rcvr>
 concept receiver =
-  derived_from<typename remove_cvref_t<Rcvr>::receiver_concept, receiver_t> &&
-  requires(const remove_cvref_t<Rcvr>& rcvr) {
-    { get_env(rcvr) } -> queryable;
-  } &&
-  move_constructible<remove_cvref_t<Rcvr>> &&
-  constructible_from<remove_cvref_t<Rcvr>, Rcvr>;
+    derived_from<typename remove_cvref_t<Rcvr>::receiver_concept, receiver_t> &&
+    requires(const remove_cvref_t<Rcvr>& rcvr) {
+      { get_env(rcvr) } -> queryable;
+    } &&
+    move_constructible<remove_cvref_t<Rcvr>> &&
+    constructible_from<remove_cvref_t<Rcvr>, Rcvr>;
 
 }
 ```
