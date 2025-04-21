@@ -225,6 +225,30 @@ concept receiver =
 
 *stopped completion function* であり、関連する completion tag は `std::execution::set_stopped_t` それ自身です。
 
+## operation state
+
+`operation_state` concept は *operation state* 型に対する要求を定義します。
+具体的には以下の通りです。
+
+```cpp
+namespace std::execution {
+
+template <class O>
+concept operation_state =
+    derived_from<typename O::operation_state_concept, operation_state_t> &&
+    is_object_v<O> &&
+    requires (O& o) {
+      { start(o) } noexcept;
+    };
+
+}
+```
+
+`std::execution::operation_state` のオブジェクトが *asynchronous operation* の生存期間中に破棄された場合、動作は未定義です。
+ライブラリから提供された *sender* を connect した結果得られた *operation state* に対しコピーやムーブ操作を行った場合、プログラムは ill-formed です。
+
+ここで `std::execution::start` は *operation state* を受け取り、関連する *asynchronous operation* を開始する customization point object です。
+
 ---
 
 🏗️工事中
