@@ -167,24 +167,63 @@ enum class forward_progress_guarantee{
 ## scheduler
 
 `std::execution::scheduler` concept は *scheduler* の型に対する要求を定義します。
-具体的には、以下の通りです。
+具体的には以下の通りです。
 
 ```cpp
 namespace std::execution {
-  template<class Sch>
-    concept scheduler =
-      derived_from<typename remove_cvref_t<Sch>::scheduler_concept, scheduler_t> &&
-      queryable<Sch> &&
-      requires(Sch&& sch) {
-        { schedule(std::forward<Sch>(sch)) } -> sender;
-        { auto(get_completion_scheduler<set_value_t>(get_env(schedule(std::forward<Sch>(sch))))) } -> same_as<remove_cvref_t<Sch>>;
-      } &&
-      equality_comparable<remove_cvref_t<Sch>> &&
-      copyable<remove_cvref_t<Sch>>;
+
+template<class Sch>
+concept scheduler =
+    derived_from<typename remove_cvref_t<Sch>::scheduler_concept, scheduler_t> &&
+    queryable<Sch> &&
+    requires(Sch&& sch) {
+      { schedule(std::forward<Sch>(sch)) } -> sender;
+      { auto(get_completion_scheduler<set_value_t>(get_env(schedule(std::forward<Sch>(sch))))) } -> same_as<remove_cvref_t<Sch>>;
+    } &&
+    equality_comparable<remove_cvref_t<Sch>> &&
+    copyable<remove_cvref_t<Sch>>;
+
 }
 ```
 
 ここで `std::execution::schedule` は *scheduler* を受け取る customization point object であり、適格な `schestd::execution::schedule` の呼び出しは *schedule-expression* と呼ばれます。
+コピーや比較の操作が例外によって終了してはならず、`schedule` の呼び出しも含めて複数のスレッドから呼び出されたとしてもデータ競合を起こしてはいけません。
+同じ *execution resouce* を共有している場合にのみ比較関数は `true` を返すべきであり、`get_completion_scheduler<set_value_t>(get_env(schedule(sch)))` は `sch` と等しい必要があります。
+
+## receiver
+
+*receiver* は *asynchronous operation* の継続を表します。
+`std::execution::receiver` concept は *receiver* の型に対する要求を定義します。
+具体的には以下のとおりです。
+
+```cpp
+namespace std::execution {
+
+template<class Rcvr>
+concept receiver =
+  derived_from<typename remove_cvref_t<Rcvr>::receiver_concept, receiver_t> &&
+  requires(const remove_cvref_t<Rcvr>& rcvr) {
+    { get_env(rcvr) } -> queryable;
+  } &&
+  move_constructible<remove_cvref_t<Rcvr>> &&
+  constructible_from<remove_cvref_t<Rcvr>, Rcvr>;
+
+}
+```
+
+`final` 指定されたクラス型は `std::execution::receiver` を表しません。
+
+### `std::execution::set_value`
+
+*value completion function* であり、 関連する completion tag は `std::execution::set_value_t` それ自身です。
+
+### `std::execution::set_error`
+
+*error completion function* であり、関連する completion tag は `std::execution::set_error_t` それ自身です。
+
+### `std::execution::set_stopped`
+
+*stopped completion function* であり、関連する completion tag は `std::execution::set_stopped_t` それ自身です。
 
 ---
 
