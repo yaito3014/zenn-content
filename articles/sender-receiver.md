@@ -249,6 +249,42 @@ concept operation_state =
 
 ここで `std::execution::start` は *operation state* を受け取り、関連する *asynchronous operation* を開始する customization point object です。
 
+## sender
+
+`std::execution::sender` concept は *sender* 型に対する要求を定義します。
+具体的には以下の通りです。
+
+```cpp
+namespace std::execution {
+
+template<class Env>
+struct env-promise;  // exposition only
+
+template <class C, class Promise>
+concept is-awaitable =  // exposition only
+    /* 後述 */;
+
+template<class Sndr>
+concept is-sender =  // exposition only
+    derived_from<typename Sndr::sender_concept, sender_t>;
+
+template<class Sndr>
+concept enable-sender =  // exposition only
+  is-sender<Sndr> ||
+  is-awaitable<Sndr, env-promise<env<>>>;
+
+template <class Sndr>
+concept sender =
+    bool(enable-sender<remove_cvref_t<Sndr>>) &&
+    requires (const remove_cvref_t<Sndr>& sndr) {
+      { get_env(sndr) } -> queryable;
+    } &&
+    move_constructible<remove_cvref_t<Sndr>> &&
+    constructible_from<remove_cvref_t<Sndr>, Sndr>;
+
+}
+```
+
 ---
 
 🏗️工事中
