@@ -186,7 +186,7 @@ concept scheduler =
 }
 ```
 
-ここで `std::execution::schedule` は *scheduler* を受け取る customization point object であり、適格な `schestd::execution::schedule` の呼び出しは *schedule-expression* と呼ばれます。
+ここで `std::execution::schedule` は *scheduler* を受け取る customization point object であり、適格な `std::execution::schedule` の呼び出しは *schedule-expression* と呼ばれます。
 コピーや比較の操作が例外によって終了してはならず、`schedule` の呼び出しも含めて複数のスレッドから呼び出されたとしてもデータ競合を起こしてはいけません。
 同じ *execution resouce* を共有している場合にのみ比較関数は `true` を返すべきであり、`get_completion_scheduler<set_value_t>(get_env(schedule(sch)))` は `sch` と等しい必要があります。
 
