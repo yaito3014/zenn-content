@@ -213,6 +213,33 @@ concept receiver =
 
 `final` 指定されたクラス型は `std::execution::receiver` を表しません。
 
+`std::execution::receiver_of` concept は *completion signatures* の集合に対応する *completion operation* の集合の第一引数として使用可能な *receiver* 型に対する要求を定義します。
+具体的には以下の通りです。
+
+```cpp
+namespace std::execution {
+
+template<class Signature, class Rcvr>
+concept valid-completion-for =  // exposition only
+    requires (Signature* sig) {
+      []<class Tag, class... Args>(Tag(*)(Args...))
+          requires callable<Tag, remove_cvref_t<Rcvr>, Args...>
+      {}(sig);
+    };
+
+template<class Rcvr, class Completions>
+concept has-completions =  // exposition only
+    requires (Completions* completions) {
+      []<valid-completion-for<Rcvr>...Sigs>(completion_signatures<Sigs...>*){}(completions);
+    };
+
+template<class Rcvr, class Completions>
+concept receiver_of =
+    receiver<Rcvr> && has-completions<Rcvr, Completions>;
+
+}
+```
+
 ### `std::execution::set_value`
 
 *value completion function* であり、 関連する completion tag は `std::execution::set_value_t` それ自身です。
