@@ -175,12 +175,11 @@ struct variant {
 
 1. あらゆる entity の情報を保持する型 `std::meta::info`
 2. `std::meta::info` を**得る**リフレクション演算子 `^^`
-3. `std::meta::info` を**戻す**スプライス演算子 `[:` `:]`
-4. `std::meta::info` を取り巻く consteval 関数群
+3. `std::meta::info` を取り巻く consteval 関数群
 
 となります。今回は
 
-> 4. `std::meta::info` を取り巻く consteval 関数群
+> 3. `std::meta::info` を取り巻く consteval 関数群
 
 の中でも `std::meta::define_aggregate` による aggregate の定義に焦点を当てます。
 `std::meta::define_aggregate` はその時点で incomplete なクラス型の _reflection_ とデータメンバの持つべき性質を表す _data member description_ [^dmd] という種類の _reflection_ の列を受け取りそのクラス型を aggregate として定義します。
