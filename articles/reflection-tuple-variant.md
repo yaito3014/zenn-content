@@ -136,7 +136,7 @@ template<class... Ts>
 struct variant {
   int tag;
   union {
-    Ts... alternatives
+    Ts... alternatives;
   };
 };
 ```
