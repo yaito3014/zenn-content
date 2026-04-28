@@ -34,3 +34,12 @@ https://github.com/yaito3014/polyfill/blob/84c839b00484b0a384b0e431b14e09b8f3ff3
 # `toptional`
 
 今回作成した `toptional` は、 C++26 時点の `std::optional` と互換のインターフェースを持ち、かつ invalid な値を `nullopt` に割り当てて省メモリ化を図るクラスです。
+Rust の niche optimization がヌル値のみを最適化対象にするのに対し、 `toptional` は任意の値を `nullopt` に割り当てることができます。
+これによって、例えば -1 を割り当てたり、 `INT_MAX` を割り当てたりすることができ、幅広く最適化が可能になります。
+ここで無効値をどのように型にエンコードするかについてですが、そのための trait を提供することで実現します。
+具体的には、対象とす型の値 `x` に対して `engaged(x)` 及び `tombstone_value()` という静的メンバを持つクラスをテンプレート引数に取ります。
+とはいえ毎回そのような trait を作るのは煩雑であるため、簡単のためデフォルトで `non_zero_traits` や `tombstone_value_for` ヘルパを用意しています。
+使用例を見てもらったほうが早いかもしれません。
+
+```cpp
+```
