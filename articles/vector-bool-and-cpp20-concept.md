@@ -35,4 +35,4 @@ C++20においてイテレータ要件などが刷新され、`std::vector<bool>
 
 [^2]: https://eel.is/c++draft/iterator.cpp17#forward.iterators-1.3
 
-[^3]: 規格内で"A models B"とある表現を、この記事では「BはAのモデルとなる」と表現することにしています。
+[^3]: 規格内で"A models B"とある表現を、この記事では「AはBのモデルとなる」と表現することにしています。
