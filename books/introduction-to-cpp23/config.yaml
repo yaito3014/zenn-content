@@ -1,0 +1,8 @@
+title: "C++23入門"
+summary: "C++23への入門書"
+topics: ["cpp"]
+published: false
+price: 0
+chapters:
+  - intro
+  - setup
