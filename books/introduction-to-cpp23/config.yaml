@@ -12,3 +12,4 @@ chapters:
   - expression-and-statement
   - integer-type
   - output
+  - preprocessing-directive
