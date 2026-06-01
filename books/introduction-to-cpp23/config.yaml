@@ -10,3 +10,5 @@ chapters:
   - function
   - variable
   - expression-and-statement
+  - integer-type
+  - output
