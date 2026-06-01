@@ -17,6 +17,7 @@ chapters:
   - assignment
   - loop
   - multiple-files
+  - translation
   - fundamental-types
   - logical-operators
   - const
