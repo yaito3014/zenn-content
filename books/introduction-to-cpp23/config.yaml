@@ -29,3 +29,4 @@ chapters:
   - object-parameter
   - constructor-destructor
   - inheritance
+  - polymorphism
