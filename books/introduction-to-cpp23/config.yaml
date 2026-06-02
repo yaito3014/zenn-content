@@ -22,3 +22,5 @@ chapters:
   - logical-operators
   - const
   - class
+  - default-initialization
+  - access-control
