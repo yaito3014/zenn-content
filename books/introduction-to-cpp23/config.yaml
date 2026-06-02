@@ -19,6 +19,7 @@ chapters:
   - multiple-files
   - translation
   - fundamental-types
+  - enum
   - logical-operators
   - more-operators
   - break-continue
