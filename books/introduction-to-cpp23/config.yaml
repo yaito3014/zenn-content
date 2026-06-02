@@ -20,6 +20,7 @@ chapters:
   - translation
   - fundamental-types
   - logical-operators
+  - more-operators
   - const
   - class
   - default-initialization
