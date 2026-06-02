@@ -28,5 +28,6 @@ chapters:
   - reference-and-pointer
   - object-parameter
   - constructor-destructor
+  - conversion
   - inheritance
   - polymorphism
