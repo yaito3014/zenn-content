@@ -21,6 +21,7 @@ chapters:
   - fundamental-types
   - logical-operators
   - more-operators
+  - break-continue
   - const
   - class
   - default-initialization
