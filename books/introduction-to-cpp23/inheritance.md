@@ -6,7 +6,7 @@ title: "継承"
 
 ## 派生クラス
 
-アクセス制御の章の `Counter` を振り返る。
+これまで見てきた `Counter` を振り返る。
 
 ```cpp
 class Counter
