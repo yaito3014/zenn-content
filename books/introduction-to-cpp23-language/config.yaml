@@ -1,0 +1,28 @@
+title: "C++23入門 言語編"
+summary: "C++23入門シリーズの言語編。基本編の続きとして、言語機能をより深く据える。"
+topics: ["cpp"]
+published: false
+price: 0
+chapters:
+  - intro
+  - namespace
+  - type-alias
+  - static-and-linkage
+  - attributes
+  - template
+  - concepts
+  - variadic-and-specialization
+  - value-categories
+  - copy-and-move
+  - lifetime-and-storage
+  - operator-overloading
+  - user-defined-literals
+  - abstract-class
+  - casts
+  - structured-bindings
+  - union
+  - lambda
+  - recursion
+  - constexpr
+  - exception
+  - outro
