@@ -23,6 +23,7 @@ chapters:
   - logical-operators
   - more-operators
   - break-continue
+  - switch
   - const
   - class
   - default-initialization
