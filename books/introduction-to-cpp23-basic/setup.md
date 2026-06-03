@@ -11,11 +11,11 @@ title: "環境構築"
 本書の環境には、次のものが要る。
 
 - **cabin** 本体。Rust のツールチェーンを入れたうえで、`cargo install cabinpkg` で導入する。導入されるコマンドの名前は `cabin` である。対応する OS は Linux と macOS である。
-- cabin がビルドに使う外部のツール。**GCC** や **Clang** といった C++ コンパイラと、**Ninja** である。
+- cabin がビルドに使う外部のビルドツール。**GCC** や **Clang**、そして **Ninja** である。
 
-本書のコードは `std::println`(ヘッダ `<print>`)を使う。これを使うには、`<print>` に対応した C++ コンパイラが要る(たとえば GCC では 14 以降)。対応していないと、本書のコードはビルドに失敗する。
+本書のコードは `std::println`(ヘッダ `<print>`)を使う。これを使うには、`<print>` に対応したビルドツールが要る(たとえば GCC では 14 以降)。対応していないと、本書のコードはビルドに失敗する。
 
-これらの入れ方は OS や環境によって異なる。cabin の導入は [cabin のドキュメント](https://cabinpkg.com/docs/installation/) に、コンパイラや Ninja の導入は各環境の案内に従う。
+これらの入れ方は OS や環境によって異なる。cabin の導入は [cabin のドキュメント](https://cabinpkg.com/docs/installation/) に、GCC や Clang、Ninja の導入は各環境の案内に従う。
 
 ## cabin を入れる
 
@@ -80,7 +80,7 @@ type = "executable"
 sources = ["src/main.cc"]
 ```
 
-`cxxflags` に書いた値は、ビルドのときに C++ コンパイラへそのまま渡される。`-std=c++23` は、使う C++ の版を C++23 にするものである。
+`cxxflags` に書いた値は、ビルドのときに、cabin が使うビルドツールへそのまま渡される。`-std=c++23` は、使う C++ の版を C++23 にするものである。
 
 ## プログラムを動かす
 
