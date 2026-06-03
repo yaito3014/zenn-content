@@ -76,7 +76,7 @@ std::println("{}", b.value());
 
 同じ `count_up` の同じ `c.increment()` でも、`c` が指しているオブジェクトが `Counter` か `StepCounter` かによって、呼ばれる `increment` が変わる。この、指している先のオブジェクトの型を **動的な型** と呼ぶ。仮想関数は、動的な型に応じて呼び分けられる。基底クラスの参照やポインタを通して、動的な型に応じた振る舞いを呼ぶことを **多態** と呼ぶ。
 
-`increment` を `virtual` にしていなければ、`count_up` の中の `c.increment()` は、つねに `Counter` の `increment` になる。`StepCounter` を渡しても上書きしたほうは呼ばれず、`a` も `b` も同じ振る舞いになる。`virtual` を付けることで、動的な型に応じた呼び分けが起きる。
+`increment` を `virtual` にしていなければ、`count_up` の中の `c.increment()` は、つねに `Counter` の `increment` になる。`StepCounter` を渡しても上書きしたほうは呼ばれず、`a` も `b` も同じ振る舞いになる。
 
 ## override で上書きの取り違えを防ぐ
 
