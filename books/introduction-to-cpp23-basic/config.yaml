@@ -1,0 +1,41 @@
+title: "C++23入門 基本編"
+summary: "C++23への入門書"
+topics: ["cpp"]
+published: false
+price: 0
+chapters:
+  - intro
+  - setup
+  - declaration
+  - function
+  - variable
+  - expression-and-statement
+  - integer-type
+  - output
+  - preprocessing-directive
+  - branch
+  - assignment
+  - loop
+  - multiple-files
+  - translation
+  - fundamental-types
+  - enum
+  - logical-operators
+  - more-operators
+  - break-continue
+  - switch
+  - const
+  - class
+  - default-initialization
+  - access-control
+  - type-and-function
+  - reference-and-pointer
+  - object-parameter
+  - constructor-destructor
+  - conversion
+  - inheritance
+  - polymorphism
+  - new-delete
+  - array
+  - auto
+  - outro
