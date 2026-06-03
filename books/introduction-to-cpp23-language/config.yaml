@@ -17,6 +17,7 @@ chapters:
   - lifetime-and-storage
   - operator-overloading
   - user-defined-literals
+  - iterator-and-range-for
   - abstract-class
   - casts
   - structured-bindings
