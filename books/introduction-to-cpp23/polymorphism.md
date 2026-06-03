@@ -27,7 +27,7 @@ public:
 };
 ```
 
-`virtual` を付けた `increment` は、派生クラスで作り直せる。`step` ずつ数える `StepCounter` を派生クラスとして作る。
+`virtual` を付けた `increment` は、派生クラスで定義し直せる。`step` ずつ数える `StepCounter` を派生クラスとして作る。
 
 ```cpp
 class StepCounter : public Counter
@@ -46,7 +46,7 @@ public:
 };
 ```
 
-`StepCounter` の `increment` は、`count` を `step` ずつ増やす。基底クラスの仮想関数を派生クラスで作り直すことを **オーバーライド** と呼ぶ。関数の後ろに付けた `override` は、これが基底クラスの仮想関数の上書きであることを示す。
+`StepCounter` の `increment` は、`count` を `step` ずつ増やす。基底クラスの仮想関数を派生クラスで定義し直すことを **オーバーライド** と呼ぶ。関数の後ろに付けた `override` は、これが基底クラスの仮想関数をオーバーライドすることを示す。
 
 ## 基底クラスの参照を通して呼び分ける
 
@@ -72,18 +72,18 @@ count_up(b);
 std::println("{}", b.value());
 ```
 
-`count_up(a)` では `a` の `increment` が2回呼ばれ、`count` は `2` になる。`count_up(b)` では `b` の `increment`、すなわち `StepCounter` で上書きしたほうが呼ばれ、`count` は `10` ずつ増えて `20` になる。出力は `2`、続いて `20` である。
+`count_up(a)` では `a` の `increment` が2回呼ばれ、`count` は `2` になる。`count_up(b)` では `b` の `increment`、すなわち `StepCounter` でオーバーライドしたほうが呼ばれ、`count` は `10` ずつ増えて `20` になる。出力は `2`、続いて `20` である。
 
-同じ `count_up` の同じ `c.increment()` でも、`c` が指しているオブジェクトが `Counter` か `StepCounter` かによって、呼ばれる `increment` が変わる。この、指している先のオブジェクトの型を **動的な型** と呼ぶ。仮想関数は、動的な型に応じて呼び分けられる。基底クラスの参照やポインタを通して、動的な型に応じた振る舞いを呼ぶことを **多態** と呼ぶ。
+同じ `count_up` の同じ `c.increment()` でも、`c` が指しているオブジェクトが `Counter` か `StepCounter` かによって、呼ばれる `increment` が変わる。この、指している先のオブジェクトの型を **動的な型** と呼ぶ。仮想関数は、動的な型に応じて呼び分けられる。動的な型が派生クラスのときは、派生クラスでオーバーライドした版が、基底クラスの版に優先して呼ばれる。基底クラスの参照やポインタを通して、動的な型に応じた振る舞いを呼ぶことを **多態** と呼ぶ。
 
-`increment` を `virtual` にしていなければ、`count_up` の中の `c.increment()` は、つねに `Counter` の `increment` になる。`StepCounter` を渡しても上書きしたほうは呼ばれず、`a` も `b` も同じ振る舞いになる。
+`increment` を `virtual` にしていなければ、`count_up` の中の `c.increment()` は、つねに `Counter` の `increment` になる。`StepCounter` を渡してもオーバーライドしたほうは呼ばれず、`a` も `b` も同じ振る舞いになる。
 
-## override で上書きの取り違えを防ぐ
+## override でオーバーライドの取り違えを防ぐ
 
-`override` を付けておくと、上書きのつもりが上書きになっていない誤りを、ビルドの段階で捕まえられる。たとえば `increment` の綴りを間違えると、基底クラスに対応する仮想関数がない。
+`override` を付けておくと、オーバーライドのつもりがオーバーライドになっていない誤りを、ビルドの段階で捕まえられる。たとえば `increment` の綴りを間違えると、基底クラスに対応する仮想関数がない。
 
 :::message
-override を付けた関数が何も上書きしていない
+override を付けた関数が何もオーバーライドしていない
 ```cpp
 void incrment() override
 {
@@ -93,7 +93,7 @@ void incrment() override
 `incrment` は綴り間違いで、基底クラス `Counter` にこの名前の仮想関数はない。`override` を付けているため、ビルドに失敗する。
 :::
 
-もし `override` を付けていなければ、これは `increment` とは別の新しい関数とみなされ、ビルドは成功してしまう。そのうえ、`Counter&` を通した `increment` の呼び出しは基底クラスのままになり、上書きしたつもりの関数は呼ばれない。`override` は、こうしたビルドの通る誤りを、ビルドの段階の誤りに変える。
+もし `override` を付けていなければ、これは `increment` とは別の新しい関数とみなされ、ビルドは成功してしまう。そのうえ、`Counter&` を通した `increment` の呼び出しは基底クラスのままになり、オーバーライドしたつもりの関数は呼ばれない。`override` は、こうしたビルドの通る誤りを、ビルドの段階の誤りに変える。
 
 ## 値で受け取るとスライシングが起きる
 

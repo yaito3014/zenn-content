@@ -46,7 +46,7 @@ struct Rectangle
 };
 ```
 
-`width` と `height` に `= 0` と書いておくと、`Rectangle r;` とした `r` の `width` と `height` は `0` になる。値が定まらない心配がなくなる。
+`width` と `height` に `= 0` と書いておくと、`Rectangle r;` とした `r` の `width` と `height` は `0` になる。値が定まらないことがなくなる。
 
 ## 独自の初期化
 
