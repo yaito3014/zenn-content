@@ -24,7 +24,7 @@ default:
 }
 ```
 
-`switch (n)` は、`n` の値を見て、それに一致する `case` へ進む。`n` は `2` なので `case 2:` に進み、`two` を出力する。どの `case` にも一致しないときは、`default:` に進む。`case` の処理の終わりには `break` を書く。この `break` は、繰り返しの章で見たものと同じで、ここでは `switch` を抜ける。
+`switch (n)` は、`n` の値を見て、それに一致する `case` へ進む。`n` は `2` なので `case 2:` に進み、`two` を出力する。どの `case` にも一致しないときは、`default:` に進む。`case` の処理の終わりには `break` を書く。この `break` は、break と continue の章で見たものと同じで、ここでは `switch` を抜ける。
 
 `switch` で分けられるのは整数だけでなく、列挙型の値でもよい。列挙型 `Color` の値なら、`case Color::red:` のように書いて分けられる。
 
