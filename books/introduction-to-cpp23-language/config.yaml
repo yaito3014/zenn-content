@@ -16,6 +16,7 @@ chapters:
   - copy-and-move
   - lifetime-and-storage
   - operator-overloading
+  - friend
   - user-defined-literals
   - iterator-and-range-for
   - abstract-class
