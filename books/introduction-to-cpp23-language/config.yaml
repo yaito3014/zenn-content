@@ -15,6 +15,7 @@ chapters:
   - concepts
   - variadic-and-specialization
   - value-categories
+  - defaulted-and-deleted
   - copy-and-move
   - lifetime-and-storage
   - memory-layout
