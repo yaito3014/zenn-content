@@ -16,6 +16,7 @@ chapters:
   - value-categories
   - copy-and-move
   - lifetime-and-storage
+  - memory-layout
   - operator-overloading
   - friend
   - user-defined-literals
