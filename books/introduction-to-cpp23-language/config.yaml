@@ -11,6 +11,7 @@ chapters:
   - static-members
   - attributes
   - template
+  - overload-resolution
   - concepts
   - variadic-and-specialization
   - value-categories
