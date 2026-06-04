@@ -34,7 +34,7 @@ chapters:
   - constructor-destructor
   - conversion
   - inheritance
-  - polymorphism
+  - virtual-functions
   - new-delete
   - array
   - auto
