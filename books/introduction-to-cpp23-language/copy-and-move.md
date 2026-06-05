@@ -34,7 +34,7 @@ Buffer b = a;
 配列ごと複製するには、コピーコンストラクタを自分で書く。
 
 ```cpp
-Buffer(const Buffer& other) : data(new int[other.size]), size(other.size)
+Buffer(Buffer const& other) : data(new int[other.size]), size(other.size)
 {
     for (int i = 0; i < size; i = i + 1)
         data[i] = other.data[i];
@@ -57,7 +57,7 @@ Buffer(Buffer&& other) : data(other.data), size(other.size)
 
 `other` の配列を、新しい `Buffer` がそのまま受け取る(`data` にアドレスを写すだけで、確保はしない)。そのうえで `other.data` を `nullptr` にする。こうすると、`other` のデストラクタは `delete[] nullptr` となる。`delete[]` に `nullptr` を渡しても何も起こらないので、移したあとの配列を二重に解放しない。
 
-ムーブコンストラクタの引数は、rvalue 参照 `Buffer&&` である。値カテゴリの章で見たとおり、rvalue 参照は rvalue に束縛する。rvalue は `const Buffer&` にも束縛できるが、`Buffer&&` があればそちらが優先され、ムーブコンストラクタが選ばれる。
+ムーブコンストラクタの引数は、rvalue 参照 `Buffer&&` である。値カテゴリの章で見たとおり、rvalue 参照は rvalue に束縛する。rvalue は `Buffer const&` にも束縛できるが、`Buffer&&` があればそちらが優先され、ムーブコンストラクタが選ばれる。
 
 ### std::move
 
@@ -80,7 +80,7 @@ Buffer c = std::move(a);  // ムーブ。std::move(a) は rvalue
 struct OnlyCopy
 {
     OnlyCopy() = default;
-    OnlyCopy(const OnlyCopy&) {}
+    OnlyCopy(OnlyCopy const&) {}
     OnlyCopy(OnlyCopy&&) = delete;   // ムーブを禁じる
 };
 
@@ -105,7 +105,7 @@ Wrap b = std::move(a);
 コピーすれば複製ができる。だが、ある資源をただ一つのオブジェクトだけに持たせたい型もある。複製されては、その「ただ一つ」が崩れる。コピーを禁じるには、コピーコンストラクタを `= delete` する。
 
 ```cpp
-Buffer(const Buffer& other) = delete;
+Buffer(Buffer const& other) = delete;
 ```
 
 `Buffer` には、先に書いたムーブコンストラクタがある。コピーコンストラクタを `= delete` しても、そのムーブコンストラクタは残るので、`Buffer` はムーブはできるが、コピーはできない。

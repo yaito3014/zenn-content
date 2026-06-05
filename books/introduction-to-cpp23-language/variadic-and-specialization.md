@@ -71,7 +71,7 @@ sum(1.5, 2.0);    // 0 + 1.5 + 2.0 で 3.5
 template <typename T>
 struct TypeName
 {
-    static const char* get() { return "unknown"; }
+    static char const* get() { return "unknown"; }
 };
 ```
 
@@ -81,7 +81,7 @@ struct TypeName
 template <>
 struct TypeName<int>
 {
-    static const char* get() { return "int"; }
+    static char const* get() { return "int"; }
 };
 ```
 
@@ -102,7 +102,7 @@ TypeName<double>::get();   // "unknown"
 template <typename T>
 struct TypeName<T*>
 {
-    static const char* get() { return "pointer"; }
+    static char const* get() { return "pointer"; }
 };
 ```
 
