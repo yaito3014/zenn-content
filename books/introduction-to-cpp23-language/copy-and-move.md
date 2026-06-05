@@ -55,9 +55,9 @@ Buffer(Buffer&& other) : data(other.data), size(other.size)
 }
 ```
 
-`other` の配列を、新しい `Buffer` がそのまま受け取る(`data` にアドレスを写すだけで、確保はしない)。そのうえで `other.data` を `nullptr` にする。こうすると、`other` のデストラクタは `delete[] nullptr` となり、移したあとの配列を二重に解放しない。
+`other` の配列を、新しい `Buffer` がそのまま受け取る(`data` にアドレスを写すだけで、確保はしない)。そのうえで `other.data` を `nullptr` にする。こうすると、`other` のデストラクタは `delete[] nullptr` となる。`delete[]` に `nullptr` を渡しても何も起こらないので、移したあとの配列を二重に解放しない。
 
-ムーブコンストラクタの引数は、rvalue 参照 `Buffer&&` である。値カテゴリの章で見たとおり、rvalue 参照は rvalue に束縛する。
+ムーブコンストラクタの引数は、rvalue 参照 `Buffer&&` である。値カテゴリの章で見たとおり、rvalue 参照は rvalue に束縛する。rvalue は `const Buffer&` にも束縛できるが、`Buffer&&` があればそちらが優先され、ムーブコンストラクタが選ばれる。
 
 ### std::move
 
