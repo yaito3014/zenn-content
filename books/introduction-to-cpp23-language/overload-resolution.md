@@ -48,7 +48,7 @@ void k(double x);
 :::message
 受け取れる候補のない呼び出し
 ```cpp
-Point p = {1, 2};
+Point p = {.x = 1, .y = 2};
 k(p);
 ```
 `Point` は `int` にも `double` にも変換できないので、`k(int)` も `k(double)` も `p` を受け取れない。呼べる候補がなく、ビルドに失敗する。

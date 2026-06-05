@@ -21,8 +21,8 @@ struct Point
 :::message
 意味を定義していない演算子を使う
 ```cpp
-Point p = {1, 2};
-Point q = {3, 4};
+Point p = {.x = 1, .y = 2};
+Point q = {.x = 3, .y = 4};
 Point r = p + q;
 ```
 `Point` には `+` の意味が定義されていない。`p + q` はビルドに失敗する。
@@ -38,7 +38,7 @@ struct Point
 
     Point operator+(Point const& other) const
     {
-        return {x + other.x, y + other.y};
+        return {.x = x + other.x, .y = y + other.y};
     }
 };
 ```
@@ -46,8 +46,8 @@ struct Point
 `operator+` は、`+` の右側の値を引数に取り、`x` と `y` をそれぞれ足した新しい `Point` を返す。これで `p + q` が書ける。
 
 ```cpp
-Point p = {1, 2};
-Point q = {3, 4};
+Point p = {.x = 1, .y = 2};
+Point q = {.x = 3, .y = 4};
 Point r = p + q;   // r は {4, 6}
 ```
 
@@ -68,7 +68,7 @@ namespace geo
 
     Point operator+(Point const& a, Point const& b)
     {
-        return {a.x + b.x, a.y + b.y};
+        return {.x = a.x + b.x, .y = a.y + b.y};
     }
 }
 ```
@@ -76,8 +76,8 @@ namespace geo
 ここでは `Point` と `operator+` を名前空間 `geo` の中で定義した。この `+` は、`geo` の外から修飾せずに使える。
 
 ```cpp
-geo::Point p = {1, 2};
-geo::Point q = {3, 4};
+geo::Point p = {.x = 1, .y = 2};
+geo::Point q = {.x = 3, .y = 4};
 geo::Point r = p + q;   // r は {4, 6}
 ```
 
@@ -103,9 +103,9 @@ struct Point
 `x` と `y` がともに等しいとき、二つの `Point` は等しいとする。これで `==` が書ける。`!=` は、`==` の否定として使えるようになる。
 
 ```cpp
-Point p = {1, 2};
-Point q = {1, 2};
-Point s = {3, 4};
+Point p = {.x = 1, .y = 2};
+Point q = {.x = 1, .y = 2};
+Point s = {.x = 3, .y = 4};
 std::println("{}", p == q);   // true
 std::println("{}", p != s);   // true
 ```
@@ -133,8 +133,8 @@ struct Point
 `= default` の `operator<=>` は、データメンバを宣言した順に比べる。`Point` なら、まず `x` を比べ、等しければ `y` を比べる。これで `<`・`>`・`<=`・`>=` が書ける。
 
 ```cpp
-Point p = {1, 2};
-Point q = {1, 3};
+Point p = {.x = 1, .y = 2};
+Point q = {.x = 1, .y = 3};
 std::println("{}", p < q);    // true(x は等しく、y は 2 < 3)
 std::println("{}", p >= q);   // false
 ```
@@ -162,7 +162,7 @@ struct Celsius
 これで `Celsius` を `double` が要る場所に書くと、`value` が取り出される。
 
 ```cpp
-Celsius c = {25.0};
+Celsius c = {.value = 25.0};
 double d = c;   // 変換演算子で double になる
 std::println("{}", d);   // 25
 ```

@@ -46,8 +46,8 @@ struct Box
 これを **クラステンプレート** と呼ぶ。使うときは、`Box<int>` のように型を与える。
 
 ```cpp
-Box<int> a = {3};
-Box<double> b = {2.5};
+Box<int> a = {.value = 3};
+Box<double> b = {.value = 2.5};
 ```
 
 `Box<int>` は `value` が `int`、`Box<double>` は `value` が `double` になる。基本編で名前の一部として使った `std::vector<int>` の `<int>` も、これと同じく、クラステンプレート `vector` に型 `int` を与えたものである。標準ライブラリが提供するものの多くは、こうしたテンプレートである。

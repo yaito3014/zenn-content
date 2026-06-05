@@ -29,7 +29,7 @@ struct Point
 この `Point` を `twice` に渡してみる。
 
 ```cpp
-Point p = {1, 2};
+Point p = {.x = 1, .y = 2};
 twice(p);
 ```
 
@@ -38,7 +38,7 @@ twice(p);
 :::message
 `+` を持たない型でテンプレートを実体化する
 ```cpp
-Point p = {1, 2};
+Point p = {.x = 1, .y = 2};
 twice(p);
 ```
 `twice(p)` は `T` を `Point` として実体化され、本体の `x + x` が `Point` では書けない。ビルドに失敗する。
@@ -86,7 +86,7 @@ twice(2.5);   // double も満たす
 :::message
 制約を満たさない型でテンプレートを呼ぶ
 ```cpp
-Point p = {1, 2};
+Point p = {.x = 1, .y = 2};
 twice(p);
 ```
 `Point` は `x + x` が書けず、`Addable` を満たさない。`twice` は `Addable` を満たす型でしか候補にならず、ほかに候補もないので、`twice(p)` は呼べる関数がなく、ビルドに失敗する。
