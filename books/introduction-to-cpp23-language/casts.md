@@ -31,7 +31,7 @@ std::println("{}", d);   // 25
 ```
 
 :::message
-explicit な変換を暗黙に書く
+explicit な変換を暗黙に使う
 ```cpp
 Celsius c = {.value = 25.0};
 double d = c;
@@ -102,7 +102,7 @@ std::println("{}", x);   // 10
 
 `r` は `int const&` で、そのままでは書き換えられない。`const_cast<int&>(r)` で `const` を外すと、`r` が指す `x` を書き換えられる。`x` はもともと `const` ではないので、これは問題ない。
 
-ただし、本当に `const` なオブジェクトを `const_cast` で書き換えると、深刻な問題が起こりうる。`const_cast` で外せるのは型の上の `const` であって、オブジェクトそのものを書き換えてよくなるわけではない。
+ただし、本当に `const` なオブジェクトを `const_cast` で書き換えると、結果は定まらず、実行時に深刻な問題が起こりうる。`const_cast` で外せるのは型の上の `const` であって、オブジェクトそのものを書き換えてよくなるわけではない。
 
 ## reinterpret_cast
 
