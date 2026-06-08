@@ -36,7 +36,7 @@ std::println("{} {} {}", a.id, b.id, Widget::count);
 `count` には `static` とともに `inline` を付け、`= 0` と初期値を書いた。この `inline` は、ODR と inline の章で見たものである。`static` データメンバは、宣言とは別に定義を1つ必要とするが、`inline` を付けると、この場の初期化がそのまま定義になり、別に定義を書かずに済む。
 
 :::details inline を付けない static データメンバ
-`inline` を付けずに `static int count;` とクラスの中に書くと、それは宣言であって定義ではない。別のソースに `int Widget::count = 0;` と定義を1つ書く必要があり、書かないとリンクに失敗する。`inline static int count = 0;` は、この別の定義を不要にする書き方である。
+`inline` を付けずに `static int count;` とクラスの中に書くと、それは宣言であって定義ではない。別のソースに `int Widget::count = 0;` と定義を1つ書く必要があり、書かないとリンクに失敗する。`static inline int count = 0;` は、この別の定義を不要にする書き方である。
 :::
 
 ## static メンバ関数
