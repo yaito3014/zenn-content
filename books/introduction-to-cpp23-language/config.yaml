@@ -1,0 +1,35 @@
+title: "Lucid C++ C++の輪郭 C++23入門 言語編"
+summary: "C++23入門シリーズの言語編。基本編の続きとして、言語機能をより深く据える。"
+topics: ["cpp"]
+published: true
+price: 0
+chapters:
+  - intro
+  - namespace
+  - type-alias
+  - odr-and-inline
+  - static-members
+  - attributes
+  - template
+  - overload-resolution
+  - concepts
+  - variadic-and-specialization
+  - value-categories
+  - defaulted-and-deleted
+  - copy-and-move
+  - lifetime-and-storage
+  - memory-layout
+  - operator-overloading
+  - friend
+  - user-defined-literals
+  - iterator-and-range-for
+  - abstract-class
+  - casts
+  - structured-bindings
+  - union
+  - lambda
+  - recursion
+  - explicit-object-parameter
+  - constexpr
+  - exception
+  - outro
