@@ -32,4 +32,5 @@ chapters:
   - explicit-object-parameter
   - constexpr
   - exception
+  - modules
   - outro
