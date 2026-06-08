@@ -39,8 +39,8 @@ struct Point
 
 座標であることを `Coord` という名前で表せる。座標の型を後で変えたくなったときも、`using Coord = ...;` の1箇所を直せば、`Coord` を使ったすべての場所に反映される。
 
-:::details 古い書き方:typedef
-型エイリアスには、`typedef` という古い書き方もある。
+:::details typedef による書き方
+型エイリアスには、`typedef` という書き方もある。`using` より前からあるものである。
 
 ```cpp
 typedef int Coord;
