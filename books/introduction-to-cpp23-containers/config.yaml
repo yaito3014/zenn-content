@@ -1,0 +1,18 @@
+title: "Lucid C++ C++の輪郭 C++23入門 コンテナと値の型編"
+summary: "C++23入門シリーズのコンテナと値の型編。言語編の上に、標準ライブラリのコンテナ・アルゴリズム・スマートポインタと、値を表す optional・expected・variant・any を据える。"
+topics: ["cpp"]
+published: false
+price: 0
+chapters:
+  - intro
+  - string
+  - sequence-containers
+  - associative-containers
+  - ranges-and-algorithms
+  - views-and-composites
+  - smart-pointers
+  - optional
+  - expected
+  - variant
+  - any
+  - outro
