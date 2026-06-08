@@ -30,7 +30,7 @@ std::println("{}", p.sum());   // 7
 
 ## 推論で重複を減らす
 
-明示的オブジェクト引数の型は、テンプレートにすれば推論される。テンプレートの章で見た `template <typename Self>` で型パラメータ `Self` を導入し、オブジェクト引数を `this Self&& self` と書く。`Self&&` は、イテレータと範囲for の章で見た転送参照で、`Self` は呼び出したオブジェクトから決まる。オブジェクトが const かどうか、また lvalue か rvalue かが、`Self` に反映される。本章では、const の違いに注目する。
+明示的オブジェクト引数の型は、テンプレートにすれば推論される。テンプレートの章で見た `template <typename T>` の形で型パラメータ(ここでは `Self`)を導入し、オブジェクト引数を `this Self&& self` と書く。`Self&&` は、イテレータと範囲for の章で `auto&&` の形で見た転送参照で、`Self` は呼び出したオブジェクトから決まる。オブジェクトが const かどうか、また lvalue か rvalue かが、`Self` に反映される。本章では、const の違いに注目する。
 
 ```cpp
 struct Box
@@ -87,7 +87,7 @@ auto& get(this auto&& self) { return self.value; }
 再帰の章の階乗を、ラムダで書く。
 
 ```cpp
-auto factorial = [](this auto&& self, int n) -> int
+auto factorial = [](this auto&& self, int n)
 {
     if (n == 0) return 1;
     return n * self(n - 1);
@@ -95,6 +95,4 @@ auto factorial = [](this auto&& self, int n) -> int
 std::println("{}", factorial(5));   // 120
 ```
 
-`self` は、このラムダのクロージャ自身である。クロージャの型の名前は書けない(ラムダの章で見た)ので、`get` のように `Self` という型パラメータは当てられない。代わりに `self` の型を `auto&&` にして、ジェネリックラムダのように推論させる。`self(n - 1)` で、ラムダが自分を呼ぶ。`factorial(5)` は再帰の章と同じく `120` になる。
-
-戻り値の型は、引数の後ろに `-> int` と書いて明示している。`self` を呼ぶ再帰では、戻り値の型を本体から決められないので、明示する。
+`self` は、このラムダのクロージャ自身である。クロージャの型の名前は書けない(ラムダの章で見た)ので、`get` のように `Self` という型パラメータは当てられない。代わりに、ラムダの章のジェネリックラムダと同じく、`self` の型を `auto&&` にして推論させる。`self(n - 1)` で、ラムダが自分を呼ぶ。`factorial(5)` は再帰の章と同じく `120` になる。
