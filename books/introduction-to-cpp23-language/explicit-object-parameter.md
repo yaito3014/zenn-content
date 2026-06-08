@@ -78,6 +78,8 @@ auto& get(this auto&& self) { return self.value; }
 ```
 
 仮引数の型に `auto` を書くのは、`template <typename Self>` で型パラメータ `Self` を導入し、その型を仮引数に書くのと同じである。`this auto&& self` は、`this Self&& self` の短い書き方になる。この、仮引数の型に `auto` を使う形は、英語では abbreviated function template と呼ばれる。ジェネリックラムダで仮引数を `auto` にしたのと書き方は似ているが、ジェネリックラムダ(C++14)が先にあり、関数の仮引数にも `auto` を使えるようにしたのが abbreviated function template(C++20)である。
+
+`factorial` のラムダも、`[]<typename Self>` の代わりに、`[](this auto&& self, int n)` とジェネリックラムダの形で短く書ける。
 :::
 
 ## 自分を呼ぶラムダ
@@ -87,7 +89,7 @@ auto& get(this auto&& self) { return self.value; }
 再帰の章の階乗を、ラムダで書く。
 
 ```cpp
-auto factorial = [](this auto&& self, int n)
+auto factorial = []<typename Self>(this Self&& self, int n)
 {
     if (n == 0) return 1;
     return n * self(n - 1);
@@ -95,4 +97,4 @@ auto factorial = [](this auto&& self, int n)
 std::println("{}", factorial(5));   // 120
 ```
 
-`self` は、このラムダのクロージャ自身である。クロージャの型の名前は書けない(ラムダの章で見た)ので、`get` のように `Self` という型パラメータは当てられない。代わりに、ラムダの章のジェネリックラムダと同じく、`self` の型を `auto&&` にして推論させる。`self(n - 1)` で、ラムダが自分を呼ぶ。`factorial(5)` は再帰の章と同じく `120` になる。
+`self` は、このラムダのクロージャ自身である。`get` と同じく、型パラメータ `Self` を導入して `this Self&& self` と書く。ラムダでは、型パラメータを `[]` に続けて `<typename Self>` と書く。`Self` は、呼び出したクロージャの型に推論される。`self(n - 1)` で、ラムダが自分を呼ぶ。`factorial(5)` は再帰の章と同じく `120` になる。
