@@ -29,6 +29,7 @@ chapters:
   - union
   - lambda
   - recursion
+  - explicit-object-parameter
   - constexpr
   - exception
   - outro
