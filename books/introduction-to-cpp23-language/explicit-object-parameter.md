@@ -70,6 +70,16 @@ cb.get() = 9;
 
 明示的オブジェクト引数がなければ、const 版と非 const 版の `get` を別々に書くことになる。`this Self&& self` で型を推論すれば、一つにまとめられる。
 
+:::details auto で短く書く
+`this Self&& self` は、型パラメータを書かずに `auto` で短く書ける。
+
+```cpp
+auto& get(this auto&& self) { return self.value; }
+```
+
+仮引数の型に `auto` を書くのは、`template <typename Self>` で型パラメータ `Self` を導入し、その型を仮引数に書くのと同じである。`this auto&& self` は、`this Self&& self` の短い書き方になる。この、仮引数の型に `auto` を使う形は、英語では abbreviated function template と呼ばれる。ジェネリックラムダで仮引数を `auto` にしたのと書き方は似ているが、ジェネリックラムダ(C++14)が先にあり、関数の仮引数にも `auto` を使えるようにしたのが abbreviated function template(C++20)である。
+:::
+
 ## 自分を呼ぶラムダ
 
 ラムダの章で、ラムダは `operator()` を持つオブジェクトだと見た。その `operator()` のオブジェクト引数を明示的に書くと、ラムダが自分自身を `self` として受け取れる。これで、ラムダが自分を呼べる。
