@@ -8,8 +8,7 @@ title: "モジュール"
 
 値を二倍にする `twice` を、モジュールとして書く。
 
-```cpp
-// greeter.cppm
+```cpp:greeter.cppm
 export module greeter;
 
 export int twice(int n)
@@ -22,8 +21,7 @@ export int twice(int n)
 
 別のファイルから、`greeter` を取り込んで使う。
 
-```cpp
-// main.cc
+```cpp:main.cc
 #include <print>
 import greeter;
 
@@ -39,16 +37,14 @@ int main()
 
 モジュールの中の宣言のうち、`export` を付けたものだけが、`import` した側から見える。付けないものは、モジュールの中だけで使える。
 
-```cpp
-// math.cppm
+```cpp:math.cppm
 export module math;
 
 int helper(int n) { return n + 1; }              // モジュールの中だけ
 export int next(int n) { return helper(n); }     // import 側から見える
 ```
 
-```cpp
-// main.cc
+```cpp:main.cc
 #include <print>
 import math;
 
@@ -62,8 +58,7 @@ int main()
 
 :::message
 export していない名前を外から使う
-```cpp
-// main.cc
+```cpp:main.cc
 import math;
 
 int main()
@@ -78,8 +73,7 @@ int main()
 
 モジュールの中で `#include` を使いたいことがある。たとえば、`<print>` のようなヘッダを取り込むときである。`#include` は、モジュールの宣言より前の **グローバルモジュールフラグメント** に置く。`module;` だけの行で始める。
 
-```cpp
-// log.cppm
+```cpp:log.cppm
 module;
 #include <print>
 export module log;
@@ -92,8 +86,7 @@ export void note(int n)
 
 `module;` から `export module log;` までがグローバルモジュールフラグメントで、ここに `#include` を書く。`note` は `std::println` を使えるが、`<print>` で取り込んだ名前は、`log` を `import` した側には漏れない。モジュールは、取り込んだヘッダの中身を外へ流さない。
 
-```cpp
-// main.cc
+```cpp:main.cc
 import log;
 
 int main()
@@ -105,12 +98,12 @@ int main()
 :::details モジュールパーティション
 大きなモジュールは、パーティションに分けて書ける。`export module m:part;` でパーティションを書き、本体の側で `export import :part;` とまとめる。
 
-```cpp
-// m-part.cppm
+```cpp:m-part.cppm
 export module m:part;
 export int forty() { return 40; }
+```
 
-// m.cppm
+```cpp:m.cppm
 export module m;
 export import :part;
 export int two() { return 2; }

@@ -12,8 +12,7 @@ title: "ODR と inline"
 
 ヘッダに定義を書くと、そのヘッダを取り込む翻訳単位ごとに同じ定義が現れ、定義の重複になる。次のヘッダは、`square` の定義を含む。
 
-```cpp
-// square.hpp
+```cpp:square.hpp
 int square(int x)
 {
     return x * x;
@@ -24,14 +23,15 @@ int square(int x)
 
 :::message
 ヘッダに置いた定義を複数のソースから取り込む
-```cpp
-// square.hpp
+```cpp:square.hpp
 int square(int x) { return x * x; }
+```
 
-// a.cc
+```cpp:a.cc
 #include "square.hpp"
+```
 
-// b.cc
+```cpp:b.cc
 #include "square.hpp"
 ```
 `square` の定義が `a.cc` と `b.cc` の両方の翻訳単位に現れ、プログラム全体で定義が重複する。リンクに失敗する。
@@ -41,8 +41,7 @@ int square(int x) { return x * x; }
 
 定義に `inline` を付けると、同一の定義が複数の翻訳単位に現れてよくなる。
 
-```cpp
-// square.hpp
+```cpp:square.hpp
 inline int square(int x)
 {
     return x * x;
@@ -62,8 +61,7 @@ inline int square(int x)
 
 `inline` は、関数だけでなく変数にも付けられる。ヘッダに変数の定義を置くと、関数と同じく複数の翻訳単位に定義が現れて ODR に反する。`inline` を付けると、それらは重複とはみなされず、プログラム全体で1つの変数を指すものとして扱われる。
 
-```cpp
-// config.hpp
+```cpp:config.hpp
 inline int version = 23;
 ```
 
