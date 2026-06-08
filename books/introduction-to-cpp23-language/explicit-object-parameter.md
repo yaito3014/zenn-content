@@ -82,6 +82,24 @@ auto& get(this auto&& self) { return self.value; }
 `factorial` のラムダも、`[]<typename Self>` の代わりに、`[](this auto&& self, int n)` とジェネリックラムダの形で短く書ける。
 :::
 
+:::details 参照修飾子
+明示的オブジェクト引数が入る前から、呼び出すオブジェクトの値カテゴリでメンバ関数を分けることはできた。関数の後ろに `&` を付けると lvalue のオブジェクト用、`&&` を付けると rvalue のオブジェクト用になる。これを **参照修飾子** と呼ぶ。
+
+```cpp
+struct Widget
+{
+    void who() &  { std::println("lvalue"); }
+    void who() && { std::println("rvalue"); }
+};
+
+Widget w;
+w.who();          // lvalue
+Widget{}.who();   // rvalue
+```
+
+`w` は lvalue なので `who() &` が、`Widget{}` は rvalue なので `who() &&` が呼ばれる。明示的オブジェクト引数で `this Widget& self` と `this Widget&& self` を分けるのと同じことを、参照修飾子は明示的オブジェクト引数より前からある書き方で表す。一つの関数に、参照修飾子と明示的オブジェクト引数の両方は付けられない。
+:::
+
 ## 自分を呼ぶラムダ
 
 ラムダの章で、ラムダは `operator()` を持つオブジェクトだと見た。その `operator()` のオブジェクト引数を明示的に書くと、ラムダが自分自身を `self` として受け取れる。これで、ラムダが自分を呼べる。

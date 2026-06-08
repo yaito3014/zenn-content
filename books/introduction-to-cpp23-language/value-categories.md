@@ -73,6 +73,39 @@ f(a + 1);   // rvalue: 6
 
 rvalue は、その場かぎりの値で、続けて使うことを前提としない。この性質を使って rvalue の中身を移すムーブは、コピーとムーブの章で扱う。続けて使うオブジェクトと、その場かぎりの値を、値カテゴリはこのように区別する。
 
+## decltype
+
+式の型を取り出すのが `decltype` である。名前をそのまま書くと、その名前の宣言された型になる。
+
+```cpp
+int x = 5;
+decltype(x) a = 10;   // a は int
+```
+
+`decltype(x)` は、`x` の宣言された型 `int` である。
+
+名前ではない式に使うと、`decltype` はその式の値カテゴリを型に反映する。lvalue の式なら、lvalue 参照(`T&`)の型になる。`x` を括弧で囲んだ `(x)` は lvalue の式なので、`decltype((x))` は `int&` になる。
+
+```cpp
+decltype((x)) r = x;   // r は int&
+r = 20;
+std::println("{}", x);   // 20
+```
+
+`r` は `x` への参照になり、`r = 20` は `x` を書き換える。
+
+参照を付けずに書く `auto` は、参照や `const` を落として値の型にする。値カテゴリを保ったまま型を決めたいときは、`decltype(auto)` を使う。`decltype(auto)` は、`decltype` と同じ規則で型を決める。
+
+```cpp
+int x = 5;
+auto p = (x);             // p は int(参照は落ちる)
+decltype(auto) q = (x);   // q は int&((x) の値カテゴリを保つ)
+q = 20;
+std::println("{} {}", p, x);   // 5 20
+```
+
+`auto` の `p` は `x` をコピーした `int` で、`x` とは別である。`decltype(auto)` の `q` は `(x)` の値カテゴリを保って `int&` になり、`q = 20` で `x` を書き換える。関数の戻り値の型でも同じで、`auto` は値を返し、`decltype(auto)` は式の値カテゴリを保った型を返す。
+
 :::details 値カテゴリの分類
 式は、lvalue・xvalue・prvalue の三つに分かれる。本章で rvalue と呼んだものは、このうち xvalue と prvalue をまとめた呼び名である。また、lvalue と xvalue をまとめて glvalue と呼ぶ。本章は、lvalue と rvalue の区別にとどめる。
 :::
