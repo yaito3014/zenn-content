@@ -9,7 +9,8 @@ chapters:
   - sequence-containers
   - associative-containers
   - ranges-and-algorithms
-  - views-and-composites
+  - span
+  - tuple-and-pair
   - smart-pointers
   - optional
   - expected
