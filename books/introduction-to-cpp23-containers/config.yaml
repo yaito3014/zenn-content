@@ -9,6 +9,8 @@ chapters:
   - sequence-containers
   - associative-containers
   - ranges-and-algorithms
+  - views
+  - iterator-concepts
   - span
   - tuple-and-pair
   - smart-pointers
