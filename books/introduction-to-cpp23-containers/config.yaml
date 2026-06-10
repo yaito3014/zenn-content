@@ -1,7 +1,7 @@
 title: "Lucid C++ C++の輪郭 C++23入門 コンテナ編"
 summary: "C++23入門シリーズのコンテナ編。言語編の上に、標準ライブラリのコンテナ・アルゴリズム・スマートポインタと、値を表す optional・expected・variant・any を据える。"
 topics: ["cpp"]
-published: false
+published: true
 price: 0
 chapters:
   - intro
