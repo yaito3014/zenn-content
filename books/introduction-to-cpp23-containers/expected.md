@@ -48,7 +48,7 @@ std::println("{}", *e);
 
 ## 値があるときだけつなぐ
 
-`std::expected` も、`std::optional` と同じ monadic operations を持つ。`transform` や `and_then` は、値を持つときだけ続きをつなぎ、エラーを持つときは、そのエラーがそのまま伝わる。
+`std::expected` も、`std::optional` と同じく monadic operations を持つ。`transform` や `and_then` は、値を持つときだけ続きをつなぎ、エラーを持つときは、そのエラーがそのまま伝わる。
 
 ```cpp
 std::expected<int, std::string> e = 5;

@@ -94,7 +94,7 @@ struct Person
 年齢で並べ替えるには、各要素から `age` を取り出す projection を渡す。
 
 ```cpp
-std::vector<Person> people = {{"bob", 30}, {"alice", 25}, {"carol", 40}};
+std::vector<Person> people = {{.name = "bob", .age = 30}, {.name = "alice", .age = 25}, {.name = "carol", .age = 40}};
 std::ranges::sort(people, {}, [](Person const& p) { return p.age; });
 // age の昇順に並ぶ: alice(25), bob(30), carol(40)
 ```
@@ -133,4 +133,4 @@ std::sort(v.begin(), v.end());
 ```
 :::
 
-`std::ranges` のアルゴリズムは、コンテナを巡って並べ替えたり探したりする操作だった。次章では、範囲から別の範囲を導く、ビューとレンジアダプタを見ていく。
+`std::ranges` のアルゴリズムは、コンテナを巡って並べ替えたり探したりする操作だった。こうした操作は、コンテナのイテレータが何をできるかに支えられている。次章では、そのイテレータが C++20 でどうコンセプトとして捉え直されたかを見ていく。
