@@ -37,6 +37,10 @@ ages.contains("zoe");     // false
 ages.at("zoe");           // std::out_of_range を投げる
 ```
 
+:::details const の map には [] が使えない
+`[]` はキーがなければ挿入する。挿入は `std::map` を変えるので、`[]` は変更できる `std::map` にしか使えない。`std::map const&` で受け取った、読むだけの `std::map` に `[]` を使うと、ビルドに失敗する。読むだけのときは、ここで見た `at` や `contains` を使う。
+:::
+
 ## 重複しない要素
 
 `std::set<T>` は、重複しない `T` の要素を持つコンテナである。使うには `<set>` を取り込む。
