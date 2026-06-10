@@ -127,5 +127,3 @@ for (auto const& [name, age] : ages)
 :::details SoA と AoS
 `std::flat_map` のように、キーの配列と値の配列に分けて持つ持ち方を **SoA**(structure of arrays)と呼ぶ。キーと値を組にして、その組を一列に並べる持ち方は **AoS**(array of structures)である。`std::flat_map` は、`pair` の組を一列に並べる(AoS)のでなく、キーと値をそれぞれの配列に分ける(SoA)。SoA では、キーを探すときに、キーの配列だけをたどればよい。
 :::
-
-ここまでの連想コンテナ(順序を保つ `std::map`・`std::set`、ハッシュの `std::unordered_map`・`std::unordered_set`、連続して持つ `std::flat_map`・`std::flat_set`)は、キーから値を引いたり、キーがあるかを問うたりするコンテナだった。

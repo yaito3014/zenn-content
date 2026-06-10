@@ -59,5 +59,3 @@ err.transform([](int x) { return x * 10; });        // "bad" のまま
 ```
 
 `e` は値を持つので、関数を適用して `50` を持つ。`err` はエラーを持つので、関数は適用されず、`"bad"` のエラーがそのまま残る。`std::optional` で空が伝わったように、`std::expected` ではエラーが伝わる。
-
-`std::optional` と `std::expected` は、値か、その代わりのもの(なし、あるいはエラー)かを表した。

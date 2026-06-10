@@ -92,5 +92,3 @@ empty.transform([](int x) { return x * 2; })
 空の `std::optional` に `transform` しても、関数は適用されず、空のまま次へ伝わる。だから、つないだ途中で空になれば、それ以降は適用されない。値があるときの処理だけを並べられる。
 
 `transform` のほかに、つなぐ関数自身が `std::optional` を返すときに使う `and_then` と、空のときに代わりの `std::optional` を与える `or_else` がある。これらをまとめて monadic operations と呼ぶ。
-
-`std::optional` は、値があるかないかを表した。

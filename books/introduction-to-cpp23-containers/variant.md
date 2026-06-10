@@ -46,4 +46,4 @@ std::get<double>(v);
 `double` は `std::variant<int, std::string>` の候補にない。候補にない型では取り出せず、ビルドに失敗する。
 :::
 
-`std::variant` が持てる型は、挙げた型に限られる。`int` と `std::string` を挙げたなら、その二つのうちの一つである。
+`std::variant` が持てる型は、挙げた型に限られる。
