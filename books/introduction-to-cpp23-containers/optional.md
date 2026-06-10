@@ -93,4 +93,4 @@ empty.transform([](int x) { return x * 2; })
 
 `transform` のほかに、つなぐ関数自身が `std::optional` を返すときに使う `and_then` と、空のときに代わりの `std::optional` を与える `or_else` がある。これらをまとめて monadic operations と呼ぶ。
 
-`std::optional` は、値があるかないかを表した。次章では、値か、あるいはエラーかを表す `std::expected` を見る。
+`std::optional` は、値があるかないかを表した。

@@ -2,7 +2,7 @@
 title: "いくつかの型のうち一つ"
 ---
 
-`std::optional` や `std::expected` は、一つの型の値を、あるなし・エラーとともに表した。今度は、いくつかの型のうち一つを持つ `std::variant` を見る。
+`std::optional` や `std::expected` が一つの型の値を扱ったのに対し、いくつかの型のうち一つを持つのが `std::variant` である。
 
 ## いくつかの型のうち一つ
 
@@ -46,4 +46,4 @@ std::get<double>(v);
 `double` は `std::variant<int, std::string>` の候補にない。候補にない型では取り出せず、ビルドに失敗する。
 :::
 
-`std::variant` が持てる型は、挙げた型に限られる。`int` と `std::string` を挙げたなら、その二つのうちの一つである。次章では、挙げずに、任意の型を持つ `std::any` を見る。
+`std::variant` が持てる型は、挙げた型に限られる。`int` と `std::string` を挙げたなら、その二つのうちの一つである。

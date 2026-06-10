@@ -2,7 +2,7 @@
 title: "連想コンテナ"
 ---
 
-前章の `std::vector` と `std::array` は、同じ型の値を並べて持ち、要素を位置(添字)で取り出した。値を、位置でなく **キー** で引きたいこともある。名前から年齢を引く、といった対応づけである。それを担うのが **連想コンテナ** で、本章では `std::map`・`std::set`、順序を保たない `std::unordered_map`・`std::unordered_set`、そして要素を連続して持つ `std::flat_map`・`std::flat_set`(C++23)を扱う。
+シーケンスコンテナは、要素を位置(添字)で取り出した。値を、位置でなく **キー** で引きたいこともある。名前から年齢を引く、といった対応づけである。それを担うのが **連想コンテナ** で、本章では `std::map`・`std::set`、順序を保たない `std::unordered_map`・`std::unordered_set`、そして要素を連続して持つ `std::flat_map`・`std::flat_set`(C++23)を扱う。
 
 ## キーで引く
 
@@ -128,4 +128,4 @@ for (auto const& [name, age] : ages)
 `std::flat_map` のように、キーの配列と値の配列に分けて持つ持ち方を **SoA**(structure of arrays)と呼ぶ。キーと値を組にして、その組を一列に並べる持ち方は **AoS**(array of structures)である。`std::flat_map` は、`pair` の組を一列に並べる(AoS)のでなく、キーと値をそれぞれの配列に分ける(SoA)。SoA では、キーを探すときに、キーの配列だけをたどればよい。
 :::
 
-ここまでの連想コンテナ(順序を保つ `std::map`・`std::set`、ハッシュの `std::unordered_map`・`std::unordered_set`、連続して持つ `std::flat_map`・`std::flat_set`)は、キーから値を引いたり、キーがあるかを問うたりするコンテナだった。次章では、コンテナの要素を巡って探したり変えたりする操作、`std::ranges` のアルゴリズムを見ていく。
+ここまでの連想コンテナ(順序を保つ `std::map`・`std::set`、ハッシュの `std::unordered_map`・`std::unordered_set`、連続して持つ `std::flat_map`・`std::flat_set`)は、キーから値を引いたり、キーがあるかを問うたりするコンテナだった。
